@@ -1,7 +1,0 @@
-{
-  "name": "ColorMagic",
-  "description": "A magical coloring page generator for kids powered by voice and AI.",
-  "requestFramePermissions": [
-    "microphone"
-  ]
-}
