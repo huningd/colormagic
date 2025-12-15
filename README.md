@@ -1,20 +1,60 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# ColorMagic
 
-# Run and deploy your AI Studio app
+ColorMagic is a Next.js application that uses the Google Gemini API to generate coloring pages from user prompts. This project was refactored from a monolithic TypeScript application to a more scalable and secure architecture with a distinct frontend and backend.
 
-This contains everything you need to run your app locally.
+## Features
 
-View your app in AI Studio: https://ai.studio/apps/drive/1VpJxbQF4uYUP_WebSKyISFsTcw5TT08j
+-   **Next.js Frontend**: A modern, responsive user interface for displaying status and images.
+-   **Next.js Backend**: Secure API routes for handling logic and external connections.
+-   **Google Gemini API Integration**: Connects to the Gemini API to generate high-quality coloring pages.
+-   **Voice Control**: Use your voice to generate coloring pages.
 
-## Run Locally
+## Getting Started
 
-**Prerequisites:**  Node.js
+### Prerequisites
 
+-   Node.js (v18 or later)
+-   npm
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+### Installation
+
+1.  Clone the repository:
+    ```bash
+    git clone https://github.com/your-username/colormagic.git
+    cd colormagic
+    ```
+2.  Install the dependencies:
+    ```bash
+    npm install
+    ```
+
+### Configuration
+
+1.  Create a `.env.local` file in the root of the project:
+    ```bash
+    touch .env.local
+    ```
+2.  Add your Google Gemini API key to the `.env.local` file:
+    ```
+    GEMINI_API_KEY=your-api-key
+    ```
+
+### Running the Application
+
+To start the development server, run the following command:
+
+```bash
+npm run dev
+```
+
+The application will be available at [http://localhost:3000](http://localhost:3000).
+
+## Available Scripts
+
+-   `npm run dev`: Starts the development server.
+-   `npm run build`: Builds the application for production.
+-   `npm run start`: Starts the production server.
+-   `npm run lint`: Lints the code.
+-   `npm test`: Runs all tests.
+-   `npm run test:frontend`: Runs the frontend tests.
+-   `npm run test:backend`: Runs the backend tests.
