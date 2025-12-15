@@ -2,6 +2,13 @@ import { render, screen, fireEvent, waitFor, act } from '@testing-library/react'
 import Home from '../page'
 import { useGenerationStore } from '@/lib/store'
 
+// Mock the VoiceControl component
+jest.mock('@/components/VoiceControl', () => {
+  return jest.fn(({ onTranscript }) => (
+    <button onClick={() => onTranscript('a cute cat')}>Mock Voice Control</button>
+  ))
+})
+
 // Mock the store
 const mockGenerate = jest.fn()
 const mockReset = jest.fn()
@@ -28,20 +35,17 @@ describe('Home page', () => {
   it('renders the initial state correctly', () => {
     render(<Home />)
     expect(screen.getByText('ColorMagic')).toBeInTheDocument()
-    expect(screen.getByPlaceholderText('Enter a prompt')).toBeInTheDocument()
-    expect(screen.getByText('Generate')).toBeInTheDocument()
+    expect(screen.getByText('Mock Voice Control')).toBeInTheDocument()
   })
 
-  it('calls generate when the form is submitted', async () => {
+  it('calls generate when the voice control provides a transcript', async () => {
     render(<Home />)
-    const input = screen.getByPlaceholderText('Enter a prompt')
-    const form = input.closest('form')!
+    const voiceControlButton = screen.getByText('Mock Voice Control')
 
-    fireEvent.change(input, { target: { value: 'a cute dog' } })
-    fireEvent.submit(form)
+    fireEvent.click(voiceControlButton)
 
     await waitFor(() => {
-      expect(mockGenerate).toHaveBeenCalledWith('a cute dog')
+      expect(mockGenerate).toHaveBeenCalledWith('a cute cat')
     })
   })
 
@@ -51,14 +55,14 @@ describe('Home page', () => {
     act(() => {
       useGenerationStore.setState({
         status: 'success',
-        transcript: 'a cute dog',
+        transcript: 'a cute cat',
         imageUrl: 'data:image/png;base64,mock-image-data',
       })
     })
 
     await waitFor(() => {
       expect(screen.getByText('Generated Image')).toBeInTheDocument()
-      expect(screen.getByAltText('a cute dog')).toBeInTheDocument()
+      expect(screen.getByAltText('a cute cat')).toBeInTheDocument()
       expect(screen.getByText('Start Over')).toBeInTheDocument()
     })
   })
